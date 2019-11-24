@@ -31,12 +31,20 @@ class RatesSeeder extends Seeder
     protected $matrix = [];
 
     /**
+     * The precision of numbers
+     * @var integer
+     */
+    protected $precision;
+
+    /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
+        $this->precision = env('APP_RATE_PRECISION', 4);
+
         $this->loadCurrencies()
             ->initMatrix();
     }
@@ -96,7 +104,7 @@ class RatesSeeder extends Seeder
      */
     protected function reverse(float $rate): float
     {
-        return round(1 / $rate, env('APP_RATE_PRECISION', 4));
+        return round(1 / $rate, $this->precision);
     }
 
     /**
@@ -130,10 +138,11 @@ class RatesSeeder extends Seeder
     }
 
     /**
-     * Complexe case, find the exchange rate with a pivot currency
+     * Complex case, find the exchange rate with a pivot currency
      *
      * @param $source
      * @param $target
+     * @return float|bool
      */
     protected function exchange($source, $target)
     {
@@ -151,7 +160,7 @@ class RatesSeeder extends Seeder
             // We need to convert twice to the target using the pivot
             return round(
                 (1 / $sourceCurrencies[$pivot]) / $targetCurrencies[$pivot],
-                env('APP_RATE_PRECISION', 4)
+                $this->precision
             );
         }
 
