@@ -8,8 +8,9 @@ Clone the project from github and navigate to your local path. While the project
 
 First step is to set up your local config.
 
-    cp .env.example .env
-    nano .env
+> cp .env.example .env
+>
+> nano .env
 
 Most settings can be left as is, but you'll want to change the database settings.
 
@@ -83,5 +84,6 @@ You can change the precision of exchange rates during the setting up process by 
 
 You can run tests with phpunit. Before you do, make sure to re-seed your db.
 
-    php artisan db:seed
-    ./vendor/bin/phpunit
+> php artisan db:seed
+>
+> ./vendor/bin/phpunit
