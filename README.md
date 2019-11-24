@@ -45,7 +45,7 @@ These commands have set up your currencies and exchange rates in the database. I
 
 ## Running the API
 
-To serve your project locally, simply use the build-int PHP development server on port 8000:
+To serve your project locally, simply use the build-in PHP development server on port 8000:
 
 > php -S localhost:8000 -t public
 
