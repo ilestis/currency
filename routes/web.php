@@ -13,5 +13,5 @@
 
 $router->get('/', 'CurrencyController@index');
 
-$router->get('exchange/{from}/{to}', 'ExchangeController@convert');
+$router->get('exchange/{from}-{to}', 'ExchangeController@convert');
 $router->post('rates', 'RateController@post');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Currency;
 use App\Models\ExchangeRate;
+use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -29,6 +31,12 @@ class ExchangeController extends Controller
         $exchange = ExchangeRate::between($source, $target)->latest()->firstOrFail();
 
         $amount = Request::get('amount', 1);
-        return round($amount * $exchange->rate, getenv('APP_RATE_PRECISION', 4));
+        $value = round($amount * $exchange->rate, getenv('APP_RATE_PRECISION', 4));
+
+        // Give the result as a json with a timestamp to know when this was generated
+        return response()->json([
+            'value' => $value,
+            '_ts' => Carbon::now()
+        ]);
     }
 }

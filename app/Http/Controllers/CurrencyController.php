@@ -18,6 +18,6 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        return Currency::get();
+        return Currency::paginate();
     }
 }
