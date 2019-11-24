@@ -159,7 +159,7 @@ class RatesSeeder extends Seeder
         foreach ($matching as $pivot) {
             // We need to convert twice to the target using the pivot
             return round(
-                (1 / $sourceCurrencies[$pivot]) / $targetCurrencies[$pivot],
+                (1 / $targetCurrencies[$pivot]) * $sourceCurrencies[$pivot],
                 $this->precision
             );
         }
